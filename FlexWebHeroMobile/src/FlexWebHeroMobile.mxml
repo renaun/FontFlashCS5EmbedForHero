@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   creationComplete="getFonts()"
+			   minWidth="955" minHeight="600">
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		#TLF s|TextInput, #TLF s|Label
+		{
+			font-family: "Marker Felt";
+		}
+		#nonTLF s|TextInput, #nonTLF s|Label
+		{
+			font-family: "Marker Felt Thin";
+		}
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			private function getFonts():void
+			{
+				out("getFonts");
+				var myFont1:Font = new MyMarkerFelt() as Font;
+				var myFont2:Font = new MyMarkerFeltNonTLF() as Font;
+				var fonts:Array = Font.enumerateFonts();
+				for each (var key:Font in fonts)
+				{
+					out(key.fontName + " - " + key.fontStyle + " - " + key.fontType);
+				}
+			}
+			private function out(msg:String):void
+			{
+				output.text += msg + "\n";
+			}
+		]]>
+	</fx:Script>
+	<s:VGroup id="TLF">
+		<s:TextInput text="TLF Here *1234* four chars" width="200" />
+		<s:Label text="TLF Here *1234* four chars" />
+	</s:VGroup>
+	<s:VGroup id="nonTLF">
+		<s:TextInput text="Non-TLF Here *1234* four chars" width="200" />
+		<s:Label text="Non-TLF Here *1234* four chars" />
+	</s:VGroup>
+	<s:VGroup>
+		<s:TextInput text="Default Here *1234* four chars" width="200" />
+		<s:Label text="Default Here *1234* four chars" />
+	</s:VGroup>
+	<s:TextArea id="output" width="100%" height="100%" editable="false" />
+</s:Application>
